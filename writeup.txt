@@ -1,0 +1,45 @@
+1. 
+	Our client code breaks if a player presses enter without typing any letters. This occurs because our call to fgets is not
+	inside a do-while loop similar to our code for project 1. Our attempts at solving this problem failed, and fgets 
+	continued to hang if no input was given + any number of enter key presses.
+
+	The active player client blocks at the fgets call waiting for input. That client doesn't move on until that call returns.
+	The server eventually times out on that player, and moves onto sending the end of round data. After the fgets returns, 
+	the game continues correctly, but until then the game hangs. If the active player never inputs a guess,
+	the game doesn't continue for either player and the inactive is stuck. If player 1 disconnects though, the game ends as
+	described. If the inactive player disconnects, the active player is not informed until they input a guess. On a timeout,
+	the guess is not sent to the server. 
+
+	When the active player timeouts, the inactive player receives an empty string, printing it as if the active player 
+	guessed the empty string. This isn't necessarily incorrect, because active player never sent a guess to the server,
+	but just isn't quite true. This could be worded/formatted more clearly. Similary, the active player is informed their
+	time ran out, but their also told their guess was incorrect, which is technically true, but not good form.
+
+2. 
+	We assumed fgets hanging waiting for player input pausing the game completely is acceptable behavior. Both the server
+	and the inactive player wait for the active player to input a guess and press enter. Additionally, timeouts aren't 
+	computed until this player input occurs, though the player's input is never sent to the server upon exiting fgets,
+	as the client knows based on internal timing that the server has moved on.
+
+3. 
+	We used print statements to check that values were correct when sent across the network at each step, as well as 
+	checking the specifications that the correct information is being displayed to players. Beyond that, we just played
+	the game.
+
+4. 
+	fgets and player input
+	
+	Figuring out how to have the client avoid sending a guess that came after a timeout had occurred. We solved this by 
+	using the internal clock of the client, and checking start-end time with the time alotted.
+
+	Keeping track of which information is being sent between server and client in the correct order. One mistake, receiving
+	data out of order results in catastrophic meltdowns and unexpected behavior.
+
+	The large variety of types needed for the paramters of functions we used posed a learning curve. Often we would need to
+	dive into documentation, and sometimes would miss crucial information. This is just a problem inherent to C functions 
+	and return values from functions. 
+
+5. 
+	Based on our assumptions detailed above, a version of this game where if a player never enters input, the game continues
+	and the inactive player isn't paused along with the active player. We were unsure how to exit the hanging fgets upon
+	receiving a timeout code from the server, and our many attempts to solve that problem failed.

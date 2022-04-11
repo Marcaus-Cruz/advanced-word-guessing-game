@@ -1,0 +1,21 @@
+Write you assignment plan here. Refer to the assignment PDF for details. Do not change this file name.
+
+
+1) Write a one paragraph summary of the program in your own words.  What is being asked of you?  What will you implement in this assignment?
+In this project, we will be implementing another word game where two players have a set of letters and have to go back and forth entering valid words from the set
+to win the round. The last player to submit a valid word before the timer runs out wins the round. The first player to submit an invalid word loses the round.
+Win a majority of the rounds to win the game. This game will require multiple players to be able to connect to a server via a socket with the server acting as 
+the administrator of the game, sending each player the information of the game as needed.
+
+2) What you anticipate being the most challenging aspect of the assignment?
+We are anticipating that implementing the time limits to cut off the players will be the most challenging
+aspect of this assignment. We already have the sending and receiving through sockets from the previous project down 
+pretty soundly so game logic and adding the timed aspect will be difficult.
+
+
+3) Give a list of at least three resources you plan to draw from if you get stuck on something.
+Man pages, previous C assignments, Slack, socket lab, project 1, Professor Mare
+
+4) What is your plan for meeting to finish this program (e.g. ``every Monday, Wednesday and Friday from 3pm-5pm until it's done.).
+We are planning on meeting Tuesday, Wednesday, Thursday anytime after class. While staying communicative of eachother's tentative 
+schedules, of course.
